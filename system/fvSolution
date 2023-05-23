@@ -61,22 +61,22 @@ solvers
     }
 */    
     
-    "(rho|U|k|omega|e)"
+    "(rho|U|k|epsilon|h)"
     {
-        solver          PBiCGStab;
-        preconditioner  DILU;
-        //smoother        symGaussSeidel;
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
         tolerance       1e-05;
-        relTol          0.1;
+        relTol          0.05;
     }
 
-    "(rho|U|k|omega|e)Final"
+    "(rho|U|k|epsilon|h)Final"
     {
         $U;
+        tolerance       1e-07;
         relTol          0;
     }
 }
-
+/*
 SIMPLE
 {
     residualControl
@@ -90,15 +90,23 @@ SIMPLE
     pMinFactor             0.1;
     pMaxFactor               2;
 }
-
+*/
 
 PIMPLE
 {
+    /*
     nCorrectors              2;
     nNonOrthogonalCorrectors 1;
     nOuterCorrectors         1;
     pMinFactor             0.1;
     pMaxFactor               2;
+    */
+    momentumPredictor   no;
+    transonic           no;
+    nOuterCorrectors 1;
+    nCorrectors      5;
+    nNonOrthogonalCorrectors 0;
+    
 }
 
 relaxationFactors

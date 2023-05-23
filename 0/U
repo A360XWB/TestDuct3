@@ -1,4 +1,4 @@
-/*--------------------------------*- C++ -*----------------------------------*\
+    /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
 |  \\    /   O peration     | Version:  v2206                                 |
@@ -22,14 +22,15 @@ boundaryField
 {
     inlet
     {
-        type            inletOutlet;
-        inletValue      uniform (0 0 0);
+        type            pressureInletOutletVelocity;
         value           uniform (0 0 0);
     }
     
     outlet
     {
-        type            zeroGradient;
+        type            inletOutlet;
+        inletValue      uniform (0 0 0);
+        value           uniform (0 0 0);
     }
     
     wall1out

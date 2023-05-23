@@ -22,14 +22,19 @@ boundaryField
 {
     inlet
     {
-        type            totalTemperature;
-        gamma           1.4;
-        T0              uniform 297.15;
+        type            outletMappedUniformInletHeatAddition;
+        outletPatch     outlet1;
+        Q               5;     // Heat addition in W
+        TMin            100;
+        TMax            1000;
+        value           $internalField;
     }
     
     outlet
     {
-        type            zeroGradient;
+        type            inletOutlet;
+        inletValue      $internalField;
+        value           $internalField;
     }
     
     wall1out

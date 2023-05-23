@@ -13,32 +13,31 @@ FoamFile
     object      p;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-pOut            101325;
 
 dimensions      [1 -1 -2 0 0 0 0];
 
-internalField   uniform $pOut;
+internalField   uniform 1.0e5;
 
 boundaryField
 {
     inlet
     {
-        type            fixedValue;
-        value           uniform 101325;
+        type            uniformTotalPressure;
+        gamma           1.4;
+
+        p0              table
+        (
+            (0         1.0e5)
+            (0.01      1.2e5)
+        );
     }
+    
+    
 
     outlet
     {
-        type            zeroGradient;
-        /*
-        type            waveTransmissive;
-        field           p;
-        psi             thermo:psi;
-        gamma           1.4;
-        fieldInf        $pOut;
-        lInf            5;
-        value           uniform $pOut;
-        */
+        type            fixedValue;
+        value           $internalField;
     }
     
     wall1out

@@ -22,5 +22,11 @@ limitT
     selectionMode all;
 }
 
+viscousDissipation
+{
+    type            viscousDissipation;
+    enabled         true;
+}
+
 
 //************************************************************************** //
