@@ -23,7 +23,7 @@ boundaryField
     inlet
     {
         type            outletMappedUniformInletHeatAddition;
-        outletPatch     outlet1;
+        outletPatch     outlet;
         Q               5;     // Heat addition in W
         TMin            100;
         TMax            1000;

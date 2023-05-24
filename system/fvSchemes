@@ -22,13 +22,13 @@ ddtSchemes
 gradSchemes
 {
     default         Gauss linear;
-    
+    /*
     limited         cellLimited Gauss linear 1;
     
     grad(U)         $limited;
     grad(k)         $limited;
     grad(omega)     $limited;
-    
+    */
     
 }
 
@@ -36,8 +36,20 @@ divSchemes
 {
     default         none;
     
-    div(phi,U)      Gauss linearUpwind limited;
+    div(phi,U)      Gauss limitedLinearV 1;
     
+    div(phi,h)      Gauss limitedLinearV 1;
+    div(phi,K)      Gauss linear;
+
+    turbulence      Gauss limitedLinear 1;
+    div(phi,k)      $turbulence;
+    div(phi,epsilon) $turbulence;
+    div(phi,R)      $turbulence;
+    div(R)          Gauss linear;
+
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+    
+    /*
     energy          Gauss linearUpwind limited;
     
     div(phi,e)      $energy;
@@ -52,7 +64,8 @@ divSchemes
     div((phi|interpolate(rho)),p) Gauss upwind;
 
     div(((rho*nuEff)*dev2(T(grad(U)))))    Gauss linear;
-
+    */
+    
 }
 
 laplacianSchemes
@@ -69,9 +82,10 @@ snGradSchemes
 {
     default         corrected;  //orthogonal;
 }
-
+/*
 wallDist
 {
     method          meshWave;
 }
+*/
 // ************************************************************************* //
